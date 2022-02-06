@@ -52,3 +52,101 @@ SELECT
   *
 FROM
   sample_table;
+
+--SORT by 2 columns ASCENDING
+SELECT
+  *
+FROM
+  sample_table
+ORDER BY
+  column_a,
+  column_b 
+  
+  --SORT ASCENDING & DESCENDING
+SELECT
+  *
+FROM
+  sample_table
+ORDER BY
+  column_a DESC,
+  column_b
+  
+    --SORT both DESCENDING
+SELECT
+  *
+FROM
+  sample_table
+ORDER BY
+  column_a DESC,
+  column_b DESC;
+  
+  
+--CHANGED COLUMN ORDER
+
+SELECT
+  *
+FROM
+  sample_table
+ORDER BY
+  column_b DESC,
+  column_a;
+  
+
+--CHANGED COLUMN ORDER AGAIN 
+
+SELECT
+  *
+FROM
+  sample_table
+ORDER BY
+  column_b,
+  column_a DESC;
+
+--RECOURD COUNT AND DISTINCT VALUES--
+
+--How many Records in film_list table?--
+SELECT COUNT(*) AS row_count 
+FROM dvd_rentals.film_list;
+
+--Unique column values--(find unique values for the 'rating' column in 'film_list' table)
+SELECT DISTINCT rating
+FROM dvd_rentals.film_list;
+
+--Count of unique values (find unique 'category' values in film_list table)
+SELECT
+  COUNT(DISTINCT category) AS unique_category_count
+FROM dvd_rentals.film_list;
+
+
+--GROUP BY COUNT
+--what is the frequency of values in the 'rating' clolumn in the 'film_list' table?
+--COUNT(*) will not check for NULLS
+--important to note: GROUP BY returns only 1 row for each group
+
+SELECT
+  rating,
+  COUNT(*) AS frequency
+FROM dvd_rentals.film_list
+GROUP BY rating;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
