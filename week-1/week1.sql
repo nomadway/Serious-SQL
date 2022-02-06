@@ -178,6 +178,16 @@ GROUP BY 1, 2
 ORDER BY 3 DESC --here 3 refers to 'frequency'
 LIMIT 5;
 
+--GROUP BY Ordinal RECOMMENDED Syntax
+SELECT
+  rating, 
+  category,
+  COUNT(*) AS frequency
+FROM dvd_rentals.film_list  
+GROUP BY 1, 2
+ORDER BY frequency DESC 
+LIMIT 5;
+
 
 
 
