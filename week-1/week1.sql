@@ -150,6 +150,67 @@ GROUP BY rating, category
 ORDER BY frequency DESC
 LIMIT 5; 
 
+--GROUP BY Ordinal Syntax--
+SELECT
+  rating,
+  category,
+  COUNT(*) AS frequency
+FROM dvd_rentals.film_list
+GROUP BY 1, 2  --1 refers to 'rating' and 2 to 'category'
+
+--GROUP BY Ordinal Syntax example
+SELECT
+  rating, 
+  category,
+  COUNT(*) AS frequency
+FROM dvd_rentals.film_list  
+GROUP BY 1, 2
+ORDER BY rating, category, frequency DESC
+LIMIT 5; 
+
+--GROUP BY Ordinal Syntax example
+SELECT
+  rating, 
+  category,
+  COUNT(*) AS frequency
+FROM dvd_rentals.film_list  
+GROUP BY 1, 2
+ORDER BY 3 DESC
+LIMIT 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
