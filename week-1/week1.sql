@@ -175,7 +175,7 @@ SELECT
   COUNT(*) AS frequency
 FROM dvd_rentals.film_list  
 GROUP BY 1, 2
-ORDER BY 3 DESC
+ORDER BY 3 DESC --here 3 refers to 'frequency'
 LIMIT 5;
 
 
