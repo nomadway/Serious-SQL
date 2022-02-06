@@ -127,7 +127,30 @@ SELECT
   rating,
   COUNT(*) AS frequency
 FROM dvd_rentals.film_list
-GROUP BY rating;
+GROUP BY rating; 
+
+--Adding a percentage % to counting frequency of 'rating'
+SELECT
+  rating,
+  COUNT(*) AS frequency,
+  COUNT(*) :: NUMERIC / SUM(COUNT(*)) OVER () AS percentage
+FROM dvd_rentals.film_list
+GROUP BY rating
+ORDER BY frequency DESC; --ORDER BY always comes after GROUP BY
+
+--Multiple Column GROUP BY--
+--(find 5 most frequent 'rating' and 'category'
+--combinations in the film_list table)
+SELECT
+  rating,
+  category,
+  COUNT(*) AS frequency
+FROM dvd_rentals.film_list
+GROUP BY rating, category
+ORDER BY frequency DESC
+LIMIT 5; 
+
+
 
 
 
