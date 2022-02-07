@@ -31,3 +31,19 @@ FROM health.user_logs
 GROUP BY id
 ORDER BY row_count DESC
 LIMIT 15; 
+
+
+--DATA INSPECTION/INVESTIGATION
+
+--Inspecting the data where measure_value = 0
+SELECT *
+FROM health.user_logs
+WHERE measure_value = 0;
+
+--COUNT all measures where measure_value = 0
+SELECT measure, COUNT(*) AS record_count
+FROM health.user_logs
+WHERE measure_value = 0
+GROUP BY measure;
+
+
