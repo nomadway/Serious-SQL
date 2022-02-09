@@ -1,8 +1,10 @@
+--WEEK-2-
+
 --Show a few rows and all columns
 SELECT
   *
 FROM
-  health.user_logs language
+  health.user_logs 
 LIMIT
   10;
 
@@ -31,7 +33,6 @@ FROM health.user_logs
 GROUP BY id
 ORDER BY row_count DESC
 LIMIT 15; 
-
 
 --DATA INSPECTION/INVESTIGATION
 
