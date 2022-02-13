@@ -47,4 +47,15 @@ FROM health.user_logs
 WHERE measure_value = 0
 GROUP BY measure;
 
+--Check for NULL values--(There are no Null values)
+SELECT COUNT(*)
+FROM health.user_logs
+WHERE measure_value = 0 OR measure_value IS NULL;
+
+--Check for NULL values in 'systolic' measure
+SELECT COUNT(*)
+FROM health.user_logs
+WHERE systolic = 0 --this returns over 15,000 '0' values.
+OR systolic IS NULL;--when NULL is added, 41,000 values.
+
 
