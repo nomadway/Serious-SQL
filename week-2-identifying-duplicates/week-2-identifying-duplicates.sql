@@ -247,6 +247,24 @@ SELECT
   PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY measure_count) AS median_value
 FROM user_measure_count; 
 
+--QUESTION-4
+--How many users have 3 or more measurements?
+
+DROP TABLE IF EXISTS user_measure_count;
+
+CREATE TEMP TABLE user_measure_count AS
+SELECT
+  id, 
+  COUNT(*) AS measure_count,
+  COUNT(DISTINCT measure) as unique_measures
+FROM health.user_logs
+GROUP BY 1; 
+
+SELECT
+  COUNT(*)
+FROM user_measure_count
+WHERE measure_count >=3;
+
 
 
 
