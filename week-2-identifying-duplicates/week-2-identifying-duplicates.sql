@@ -231,6 +231,21 @@ SELECT
   ROUND(AVG(measure_count)) AS average_value
 FROM user_measure_count; 
 
+--QUESTION-3
+--What is the Median number of measurement per user?
+DROP TABLE IF EXISTS user_measure_count;
+
+CREATE TEMP TABLE user_measure_count AS
+SELECT
+  id, 
+  COUNT(*) AS measure_count,
+  COUNT(DISTINCT measure) as unique_measures
+FROM health.user_logs
+GROUP BY 1; 
+
+SELECT
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY measure_count) AS median_value
+FROM user_measure_count; 
 
 
 
