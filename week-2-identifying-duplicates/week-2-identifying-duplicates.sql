@@ -59,3 +59,138 @@ WHERE systolic = 0 --this returns over 15,000 '0' values.
 OR systolic IS NULL;--when NULL is added, 41,000 values.
 
 
+--Using CTE and SUBQUERY to do COUNT DISTINCT--
+--Both are run on memory and nothing get written to the Disk--
+--This is faster when using not large datasets, and where indexing or partitioning is not rrequired.
+--Using CTE--query will run in sequential order
+WITH deduped_logs AS (
+  SELECT DISTINCT *
+  FROM health.user_logs
+  )
+  
+SELECT COUNT(*)
+FROM deduped_logs;
+  
+--Using SUBQUERY--
+--This query runs from inside out, in non squential order.
+SELECT COUNT(*)
+FROM(
+  SELECT DISTINCT *
+  FROM health.user_logs)
+  AS subquery;
+
+--TEMPORARY TABLE--
+--here query is written on the Disk and user has a control how to write the query--
+--useful to do query on Large datasets, and when there's need for Indexing and Partitioning
+--similar to CTE, it is sequential
+--write and read to disk--
+DROP TABLE IF EXISTS deduplicated_user_logs;
+
+CREATE TEMP TABLE deduplicated_user_logs AS
+SELECT DISTINCT *
+FROM health.user_logs;
+
+SELECT COUNT(*)
+FROM deduplicated_user_logs; 
+
+--This query does exactly the same thing as DISTINCT 
+SELECT
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic,
+  COUNT(*) AS record_count
+FROM health.user_logs
+GROUP BY
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic
+ORDER BY record_count DESC;
+
+--Use CTE to run the above query-
+
+WITH duplicate_data AS (
+
+SELECT
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic,
+  COUNT(*) AS record_count
+FROM health.user_logs
+GROUP BY
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic
+
+)
+
+SELECT
+  id,
+  SUM(record_count) AS total_count
+FROM duplicate_data
+WHERE record_count > 1
+GROUP BY id
+ORDER BY total_count DESC;
+
+--EXERCISE QUESTIONS--
+--Which ID values has the most duplicate records in health.user_logs?
+
+WITH duplicate_data AS (
+
+SELECT
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic,
+  COUNT(*) AS record_count
+FROM health.user_logs
+GROUP BY
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic
+
+)
+
+SELECT
+  id,
+  SUM(record_count) AS total_count
+FROM duplicate_data
+WHERE record_count > 1
+GROUP BY id
+ORDER BY total_count DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
