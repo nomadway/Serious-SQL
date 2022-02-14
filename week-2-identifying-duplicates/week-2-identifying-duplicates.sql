@@ -320,6 +320,24 @@ FROM user_measure_count
 WHERE unique_measures >=2;
 
 
+--QUESTION-8
+--How many users have all 3  mesures-blood glucose, weight and blood pressure?
+DROP TABLE IF EXISTS user_measure_count;
+
+CREATE TEMP TABLE user_measure_count AS
+SELECT
+  id, 
+  COUNT(*) AS measure_count,
+  COUNT(DISTINCT measure) as unique_measures
+FROM health.user_logs
+GROUP BY 1; 
+
+SELECT
+  COUNT(*)
+FROM user_measure_count
+WHERE unique_measures =3;
+
+
 
 
 
