@@ -175,6 +175,63 @@ WHERE record_count > 1
 GROUP BY id
 ORDER BY total_count DESC;
 
+--Which log_date value had the most duplicate records after removing the max
+--duplicate ID value from the previous questions?
+
+WITH duplicate_data AS (
+
+SELECT
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic,
+  COUNT(*) AS record_count
+FROM health.user_logs
+GROUP BY
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic
+
+)
+
+SELECT
+  log_date,
+  SUM(record_count) AS total_count
+FROM duplicate_data
+WHERE record_count > 1 AND id != '054250c692e07a9fa9e62e345231df4b54ff435d'
+GROUP BY log_date
+ORDER BY total_count DESC;
+
+--QUESTION-1
+--how may unique users in user_log table?
+
+SELECT COUNT(DISTINCT id)
+FROM health.user_logs;
+
+--QUESTION-2
+--How many total measurements do we have 
+--per user on average rounded to the nearest integer?
+
+DROP TABLE IF EXISTS user_measure_count;
+
+CREATE TEMP TABLE user_measure_count AS
+SELECT
+  id, 
+  COUNT(*) AS measure_count,
+  COUNT(DISTINCT measure) as unique_measures
+FROM health.user_logs
+GROUP BY 1; 
+--how many total measurements do we have per user on average?
+SELECT
+  ROUND(AVG(measure_count)) AS average_value
+FROM user_measure_count; 
+
+
 
 
 
