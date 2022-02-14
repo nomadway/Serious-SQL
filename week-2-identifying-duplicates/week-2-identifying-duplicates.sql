@@ -338,6 +338,28 @@ FROM user_measure_count
 WHERE unique_measures =3;
 
 
+--QUESTION-9
+--For users that have blood pressure measurements, what is the
+--median systolic/diastolic blood pressure values?
+
+DROP TABLE IF EXISTS user_measure_count;
+
+CREATE TEMP TABLE user_measure_count AS
+SELECT
+  id, 
+  COUNT(*) AS measure_count,
+  COUNT(DISTINCT measure) as unique_measures
+FROM health.user_logs
+GROUP BY 1; 
+
+
+SELECT
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY systolic) AS median_systolic,
+  PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY diastolic) AS median_diastolic
+FROM health.user_logs
+WHERE measure = 'blood_pressure';
+
+
 
 
 
