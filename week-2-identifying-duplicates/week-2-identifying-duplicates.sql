@@ -266,6 +266,55 @@ FROM user_measure_count
 WHERE measure_count >=3;
 
 
+--QUESTION-5
+--How many users have 1,000 or more measurements?
+DROP TABLE IF EXISTS user_measure_count;
+
+CREATE TEMP TABLE user_measure_count AS
+SELECT
+  id, 
+  COUNT(*) AS measure_count,
+  COUNT(DISTINCT measure) as unique_measures
+FROM health.user_logs
+GROUP BY 1; 
+
+SELECT
+  COUNT(*)
+FROM user_measure_count
+WHERE measure_count >=1000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
