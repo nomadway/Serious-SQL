@@ -51,7 +51,11 @@ SELECT COUNT(*)
 FROM health.user_logs;
 ----------------------
 
---CTE vs SUBQUERY--(Biggets difference is CTE is read 'sequentially, top-down', we can have multiple CTEs in a query. SUBQUERY is read from inside-out.)
+--Using CTE and SUBQUERY to do COUNT DISTINCT--
+--Both are run on memory and nothing get written to the Disk--
+--This is faster when using not large datasets, and where indexing or partitioning is not rrequired.
+--Using CTE--query will run in sequential order
+--Stick with CTEs, as they are easier to use and understand. 
 --CTE
 WITH deduped_logs AS (
   SELECT DISTINCT *
@@ -62,6 +66,7 @@ SELECT COUNT(*)
 FROM deduped_logs;
 
 --SUBQUERY
+--This query runs from inside out, in non squential order.
 SELECT COUNT(*)
 FROM(
   SELECT DISTINCT *
@@ -82,4 +87,12 @@ FROM health.user_logs;
 
 SELECT COUNT(*)
 FROM deduplicated_user_logs; 
+
+--CTEs, SUBQUERIES & TEMP TABLES--
+
+--CTE: sequential (in-memory)
+--SUBQUERIES: inside out(in-memory)
+--TEMP TABLES: sequential ((write/read to disk). 
+--(when using TEMP TABLES, one has more control how query is written. Important concepts are indexes, partitions)
+
 
