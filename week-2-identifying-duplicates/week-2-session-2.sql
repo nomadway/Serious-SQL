@@ -94,5 +94,72 @@ FROM deduplicated_user_logs;
 --SUBQUERIES: inside out(in-memory)
 --TEMP TABLES: sequential ((write/read to disk). 
 --(when using TEMP TABLES, one has more control how query is written. Important concepts are indexes, partitions)
+--one thing to note, data on MEMEMORY is read faster than on DISK 
+
+--This query will not work to find DISTINCT/UNIQUE records. Better to use CTE
+SELECT COUNT(DISTINCT *)
+FROM health.user_logs;
+---------------------------
+
+WITH deduped_logs AS (
+    SELECT DISTINCT *
+    FROM health.user_logs)
+
+SELECT COUNT(*)
+FROM deduped_logs;---in CTE it is best practice to refer to CTE,i.e. deduped_logs
+---------------------------
+
+WITH deduped_logs AS (
+    SELECT DISTINCT *
+    FROM health.user_logs)
+
+SELECT COUNT(*)
+FROM health.user_logs;
+----------------------------
+--using MULTIPLE CTEs
+
+WITH deduped_logs AS (
+    SELECT DISTINCT *
+    FROM health.user_logs),  --First CTE is deduped_logs
+
+actual_row_count AS (
+    SELECT COUNT(*)
+    FROM health.user_logs),--Second CTE is actual_row_count
+
+final_output AS (
+    SELECT * 
+    FROM actual_row_count) --it is best practice to use final_output
+
+SELECT *
+FROM final_output;
+--------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
