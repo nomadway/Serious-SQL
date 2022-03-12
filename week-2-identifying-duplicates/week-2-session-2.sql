@@ -52,3 +52,34 @@ FROM health.user_logs;
 ----------------------
 
 --CTE vs SUBQUERY--(Biggets difference is CTE is read 'sequentially, top-down', we can have multiple CTEs in a query. SUBQUERY is read from inside-out.)
+--CTE
+WITH deduped_logs AS (
+  SELECT DISTINCT *
+  FROM health.user_logs
+  )
+  
+SELECT COUNT(*)
+FROM deduped_logs;
+
+--SUBQUERY
+SELECT COUNT(*)
+FROM(
+  SELECT DISTINCT *
+  FROM health.user_logs)
+  AS subquery;
+
+--TEMPORARY TABLE--
+--here query is written on the Disk and user has a control how to write the query--
+--useful to do query on Large datasets, and when there's need for Indexing and Partitioning
+--similar to CTE, it is sequential
+--write and read to disk--
+
+DROP TABLE IF EXISTS deduplicated_user_logs;
+
+CREATE TEMP TABLE deduplicated_user_logs AS
+SELECT DISTINCT *
+FROM health.user_logs;
+
+SELECT COUNT(*)
+FROM deduplicated_user_logs; 
+
