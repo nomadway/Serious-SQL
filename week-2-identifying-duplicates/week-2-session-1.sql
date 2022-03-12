@@ -1,4 +1,4 @@
---WEEK-2-'HEALTH ANALYTICS DATA'
+--WEEK-2-Session-1'HEALTH ANALYTICS DATA'
 
 --Show a few rows and all columns
 SELECT
