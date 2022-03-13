@@ -173,7 +173,7 @@ final_output AS (
 SELECT
   id,
   COUNT(*) AS total_record_count,--this Counts only the number of rows and not the number of frequency
-  SUM(frequency) AS actual_record_count --this query gives the number of duplicates
+  SUM(frequency) AS actual_record_count --The CORRECT thing to do is to use SUM query thatx gives the number of duplicates
 FROM groupby_counts
 WHERE frequency > 1
 GROUP BY id
