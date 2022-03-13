@@ -134,6 +134,54 @@ SELECT *
 FROM final_output;
 --------------------------------------------
 
+--INVESTIGATING DUPLICATES--
+SELECT 
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic
+FROM health.user_logs
+GROUP BY
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic;
+  --------------------------------
+  WITH groupby_counts AS (
+  SELECT 
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic,
+  COUNT(*) AS frequency
+FROM health.user_logs
+GROUP BY
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic
+),
+final_output AS (
+SELECT
+  id,
+  COUNT(*) AS total_record_count,--this Counts only the number of rows and not the number of frequency
+  SUM(frequency) AS actual_record_count --this query gives the number of duplicates
+FROM groupby_counts
+WHERE frequency > 1
+GROUP BY id
+)
+SELECT * 
+FROM final_output
+ORDER BY total_record_count DESC; 
+  
 
 
 
