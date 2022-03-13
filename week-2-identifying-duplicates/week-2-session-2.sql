@@ -181,6 +181,54 @@ GROUP BY id
 SELECT * 
 FROM final_output
 ORDER BY total_record_count DESC; 
+
+--------------------------------------------
+--THERE IS AN EASIER WAY TO IDENTIFY AND REMOVE DUPLICATES WITHOUT USING CTE
+WITH groupby_counts AS (
+  SELECT 
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic,
+  COUNT(*) AS frequency
+FROM health.user_logs
+GROUP BY
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic
+)
+SELECT *
+FROM groupby_counts
+WHERE frequency > 1;
+--------------------------------------
+--without using CTE. Query below gives data that are all duplicates.
+SELECT 
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic,
+  COUNT(*) AS frequency
+FROM health.user_logs
+GROUP BY
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic
+HAVING COUNT(*) > 1; --here cannot refer to alias 'frequency', but can refer to expression 'COUNT(*)'
+----------------------------------------
+
+
+
+
   
 
 
