@@ -90,11 +90,11 @@ FROM deduplicated_user_logs;
 
 --CTEs, SUBQUERIES & TEMP TABLES--
 
---CTE: sequential (in-memory)
+--CTE: sequential (in-memory). CTE is good for working with not so HUGE data. 
 --SUBQUERIES: inside out(in-memory)
 --TEMP TABLES: sequential ((write/read to disk). 
 --(when using TEMP TABLES, one has more control how query is written. Important concepts are indexes, partitions)
---one thing to note, data on MEMEMORY is read faster than on DISK 
+--one thing to note, data on MEMORY is read faster than on DISK. TEMP TABLES are good for optimizing data when working with HUGE data.
 
 --This query will not work to find DISTINCT/UNIQUE records. Better to use CTE
 SELECT COUNT(DISTINCT *)
