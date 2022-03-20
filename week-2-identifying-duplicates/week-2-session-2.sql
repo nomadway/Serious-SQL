@@ -226,6 +226,61 @@ GROUP BY
 HAVING COUNT(*) > 1; --here cannot refer to alias 'frequency', but can refer to expression 'COUNT(*)'
 ----------------------------------------
 
+----EXERCISE QUESTIONS---
+--Which id value has the most duplicate records in the
+--health.user_logs table?
+
+WITH cte_duplicate_counts AS (
+SELECT
+    id,
+    log_date,
+    measure,
+    measure_value,
+    systolic,
+    diastolic,
+    COUNT(*) AS frequency
+FROM health.user_logs
+GROUP BY
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic
+HAVING COUNT(*) > 1
+)
+SELECT
+  id, 
+  SUM(frequency) AS total_duplicate_records
+FROM cte_duplicate_counts
+GROUP BY id
+ORDER BY total_duplicate_records DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
