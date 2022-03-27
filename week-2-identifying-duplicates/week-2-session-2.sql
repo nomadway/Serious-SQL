@@ -256,6 +256,71 @@ FROM cte_duplicate_counts
 GROUP BY id
 ORDER BY total_duplicate_records DESC;
 
+--ANSWER: 054250c692e07a9fa9e62e345231df4b54ff435d
+
+--QUESTION-2
+--Which log_date value had the most duplicate records after
+--removing the max duplicate id value from
+--the previous question?
+--TWO SOLUTION METHODS--
+--(1)
+WITH cte_duplicate_counts AS (
+SELECT
+    id,
+    log_date,
+    measure,
+    measure_value,
+    systolic,
+    diastolic,
+    COUNT(*) AS frequency
+FROM health.user_logs
+GROUP BY
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic
+HAVING COUNT(*) > 1
+)
+SELECT
+  log_date, 
+  SUM(frequency) AS total_duplicate_records
+FROM cte_duplicate_counts
+WHERE id != '054250c692e07a9fa9e62e345231df4b54ff435d'
+GROUP BY log_date
+ORDER BY total_duplicate_records DESC;
+
+--(2)
+WITH cte_duplicate_counts AS (
+SELECT
+    id,
+    log_date,
+    measure,
+    measure_value,
+    systolic,
+    diastolic,
+    COUNT(*) AS frequency
+FROM health.user_logs
+WHERE id != '054250c692e07a9fa9e62e345231df4b54ff435d'
+GROUP BY
+  id,
+  log_date,
+  measure,
+  measure_value,
+  systolic,
+  diastolic
+HAVING COUNT(*) > 1
+)
+SELECT
+  log_date, 
+  SUM(frequency) AS total_duplicate_records
+FROM cte_duplicate_counts
+GROUP BY log_date
+ORDER BY total_duplicate_records DESC;
+  
+
+
 
 
 

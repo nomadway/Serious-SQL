@@ -188,6 +188,33 @@ GROUP BY 1, 2
 ORDER BY frequency DESC 
 LIMIT 5;
 
+--EXERCISES--
+
+--1-
+--What is the 'name' of the category with the highest 
+--category_id in the dvd_rentals.category table?
+
+SELECT
+  name,
+  category_id
+FROM dvd_rentals.category
+ORDER BY category_id DESC;
+
+--2--
+--For the films with the longest 'length', what is the title 
+--of the “R” rated film with the lowest 'replacement_cost' 
+--in 'dvd_rentals.film' table?
+
+SELECT
+  title,
+  replacement_cost,
+  length,
+  rating
+FROM dvd_rentals.film
+ORDER BY length DESC, replacement_cost
+LIMIT 10;
+
+--Answer: 'HOME PITY'
 
 
 
