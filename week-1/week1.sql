@@ -240,7 +240,16 @@ FROM dvd_rentals.address
 ORDER BY city_id DESC
 LIMIT 5; 
 
+--5--
+--Which category had the lowest 'total_sales' value 
+--according to the sales_by_film_category table? 
+--What was the total_sales value?
 
+SELECT 
+  category,
+  total_sales
+FROM dvd_rentals.sales_by_film_category
+ORDER BY total_sales ASC;
 
 
 
