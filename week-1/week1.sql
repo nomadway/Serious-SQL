@@ -261,6 +261,29 @@ FROM dvd_rentals.payment
 ORDER BY payment_date DESC
 LIMIT 1; 
 
+--7-
+--Which category had the Highest sales?
+SELECT
+   category,
+   total_sales
+FROM dvd_rentals.sales_by_film_category
+ORDER BY total_sales DESC
+LIMIT 5;
+
+
+--8--
+--Which customer_id had the latest rental_date for inventory_id = 1 and 2?
+--Translation: show the dvd_rentals.rental table and order by inventory_id and rental_date descending.
+
+SELECT 
+  customer_id,
+  inventory_id,
+  rental_id
+
+FROM dvd_rentals.rental
+WHERE inventory_id IN (1,2)
+ORDER BY inventory_id, rental_date DESC; 
+
 
 
 
