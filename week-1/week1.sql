@@ -251,6 +251,16 @@ SELECT
 FROM dvd_rentals.sales_by_film_category
 ORDER BY total_sales ASC;
 
+--6-
+--What was the latest 'payment_date' of all dvd rentals 
+--in the 'payment' table?
+
+SELECT 
+  payment_date
+FROM dvd_rentals.payment
+ORDER BY payment_date DESC
+LIMIT 1; 
+
 
 
 
