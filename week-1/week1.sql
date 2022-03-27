@@ -229,6 +229,18 @@ FROM dvd_rentals.sales_by_store
 ORDER BY total_sales DESC;
 
 
+--4-
+--What is the 'postal_code' of the city 
+--with the 5th highest 'city_id' in the dvd_rentals.address table?
+
+SELECT 
+  postal_code,
+  city_id
+FROM dvd_rentals.address
+ORDER BY city_id DESC
+LIMIT 5; 
+
+
 
 
 
