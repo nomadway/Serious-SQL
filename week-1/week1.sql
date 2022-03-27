@@ -217,6 +217,18 @@ LIMIT 10;
 --Answer: 'HOME PITY'
 
 
+--3-
+--Who was the manager of the store with the highest 
+--'total_sales' in the 'dvd_rentals.sales_by_store' table?
+
+SELECT
+  manager,
+  store,
+  total_sales
+FROM dvd_rentals.sales_by_store
+ORDER BY total_sales DESC;
+
+
 
 
 
