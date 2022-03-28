@@ -317,6 +317,27 @@ SELECT
   ORDER BY record_count DESC;
 
 
+  --What is the frequency of values in the 'rating' column 
+--in the film_list table?
+  
+SELECT 
+  rating,
+  COUNT(*) AS frequency
+FROM dvd_rentals.film_list
+GROUP BY rating
+ORDER BY frequency DESC;
+
+--Calculating PERCENTAGE of values in 'rating' column in the 'film_list' table
+
+SELECT
+  rating,
+  COUNT(*) AS frequency, 
+  COUNT(*) :: NUMERIC / SUM(COUNT(*)) OVER () AS percentage
+FROM dvd_rentals.film_list
+GROUP BY rating
+ORDER BY FREQUENCY DESC;
+
+
 
 
 
