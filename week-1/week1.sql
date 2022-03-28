@@ -337,6 +337,28 @@ FROM dvd_rentals.film_list
 GROUP BY rating
 ORDER BY FREQUENCY DESC;
 
+--Calculating percentage-METHOD-2
+SELECT
+  rating,
+  COUNT(*) AS frequency, 
+  ROUND(100 * COUNT(*) :: NUMERIC / SUM(COUNT(*)) OVER (), 2
+  ) AS percentage
+FROM dvd_rentals.film_list
+GROUP BY rating
+ORDER BY FREQUENCY DESC;
+
+--What are the 5 most frequent 'rating' and 'category' 
+--combinations in the film_list table?
+
+SELECT
+  rating,
+  category,
+  COUNT(*) AS frequency
+  FROM dvd_rentals.film_list
+  GROUP BY rating, category
+  ORDER BY frequency DESC
+  LIMIT 5; 
+
 
 
 
