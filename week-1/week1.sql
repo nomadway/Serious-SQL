@@ -360,6 +360,33 @@ SELECT
   LIMIT 5; 
 
 
+  --EXERCISES--
+
+--1--
+--Which 'actor_id' has the most number of unique 'film_id' 
+--records in the 'dvd_rentals.film_actor' table?
+
+SELECT
+  actor_id,
+  COUNT(DISTINCT film_id)  
+FROM dvd_rentals.film_actor
+GROUP BY actor_id
+ORDER BY count DESC; 
+
+
+--2--
+--How many distinct 'fid' values are there for the 3rd most common 
+--'price' value in the dvd_rentals.nicer_but_slower_film_list table?
+
+SELECT 
+  COUNT(DISTINCT fid) AS fid,
+  price
+FROM dvd_rentals.nicer_but_slower_film_list
+GROUP BY price
+ORDER BY fid DESC
+LIMIT 3; 
+
+
 
 
 
