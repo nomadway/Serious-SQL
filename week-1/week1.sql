@@ -285,6 +285,41 @@ WHERE inventory_id IN (1,2)
 ORDER BY inventory_id, rental_date DESC; 
 
 
+--GROUP BY COUNTS--
+
+SELECT
+  fid,
+  title,
+  category,
+  rating,
+  price
+FROM dvd_rentals.film_list
+LIMIT 10; 
+
+--GROUP BY--using CTE
+
+WITH example_table AS (
+  SELECT
+    fid,
+    title,
+    category,
+    rating,
+    price
+    FROM dvd_rentals.film_list
+    LIMIT 10
+
+) 
+SELECT
+  rating,
+  COUNT(*) AS record_count
+  FROM example_table
+  GROUP BY rating
+  ORDER BY record_count DESC;
+
+
+
+
+
 
 
 
