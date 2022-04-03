@@ -206,7 +206,7 @@ LIMIT 3;
 --How many unique country_id values exist in the dvd_rentals.city table?--
 
 SELECT
-  COUNT(DISTINCT country_id)
+  COUNT(DISTINCT country_id) AS unique_countries
 FROM
   dvd_rentals.city;
 
