@@ -210,6 +210,31 @@ SELECT
 FROM
   dvd_rentals.city;
 
+--4--
+--What percentage of overall 'total_sales' does the 'Sports' category 
+--make up in the dvd_rentals.sales_by_film_category table?
+
+SELECT
+  category,
+  ROUND(
+      100 * total_sales::NUMERIC / SUM(total_sales) OVER (), 2 ) AS percentage
+FROM dvd_rentals.sales_by_film_category;
+
+--5--
+--What percentage of unique 'fid' values are in the 'Children'
+-- category in the dvd_rentals.film_list table?
+SELECT
+  category,
+  ROUND (100 * COUNT(DISTINCT fid)::NUMERIC / SUM(COUNT(DISTINCT fid)) OVER (), 2) AS percentage
+FROM dvd_rentals.film_list
+GROUP BY category
+ORDER BY category;
+
+
+
+
+
+
 
 
 
