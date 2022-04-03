@@ -231,6 +231,12 @@ GROUP BY category
 ORDER BY category;
 
 
+------------IDENTIFYING DUPLICATE RECORDS--------------------
+------------EXERCISES----------------------
+--1--
+
+
+
 
 
 
