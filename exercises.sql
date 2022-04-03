@@ -202,6 +202,13 @@ GROUP BY price
 ORDER BY fid DESC
 LIMIT 3; 
 
+--3--
+--How many unique country_id values exist in the dvd_rentals.city table?--
+
+SELECT
+  COUNT(DISTINCT country_id)
+FROM
+  dvd_rentals.city;
 
 
 
