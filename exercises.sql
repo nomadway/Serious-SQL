@@ -234,10 +234,35 @@ ORDER BY category;
 ------------IDENTIFYING DUPLICATE RECORDS--------------------
 ------------EXERCISES----------------------
 --1--
+--Which id value has the most number of duplicate records in the health.user_logs table?--
+WITH count_duplicates AS (
+SELECT
+    id,
+    log_date,
+    measure,
+    measure_value,
+    systolic,
+    diastolic,
+    COUNT(*) AS frequency
+FROM health.user_logs
+GROUP BY
+    id,
+    log_date,
+    measure,
+    measure_value,
+    systolic,
+    diastolic
+)
+SELECT
+  id,
+  SUM(frequency) AS total_num_duplicates
+  FROM count_duplicates
+  WHERE frequency > 1
+  GROUP BY id
+  ORDER BY total_num_duplicates DESC
+LIMIT 10;
 
-
-
-
+--2--
 
 
 
