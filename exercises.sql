@@ -233,6 +233,48 @@ ORDER BY category;
 
 ------------IDENTIFYING DUPLICATE RECORDS--------------------
 ------------EXERCISES----------------------
+
+--How many rows are there in the film_list table?
+SELECT 
+  COUNT(*) AS row_count
+FROM 
+  dvd_rentals.film_list  
+
+--What are the unique values for the rating column in the film table?
+SELECT
+  DISTINCT rating
+FROM 
+  dvd_rentals.film
+
+  --How many unique category values are there in the film_list table?
+SELECT
+  COUNT(DISTINCT category) AS unique_category_count
+FROM
+  dvd_rentals.film_list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 --1--
 --Which id value has the most number of duplicate records in the health.user_logs table?--
 WITH count_duplicates AS (
