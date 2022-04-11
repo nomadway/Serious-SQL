@@ -252,7 +252,42 @@ SELECT
 FROM
   dvd_rentals.film_list
 
+--What is the frequency of values in the rating column in the film_list table?
+SELECT
+  rating,
+  COUNT(*) AS frequency
+FROM dvd_rentals.film_list
+GROUP BY rating
+ORDER BY frequency DESC; 
+-------------------
+SELECT
+  fid,
+  title,
+  category,
+  price,
+  rating
 
+FROM
+  dvd_rentals.film_list
+LIMIT 10;
+-----------------------
+
+WITH frequency_table AS (
+  SELECT
+    fid,
+    title,
+    category,
+    rating,
+    price
+  FROM dvd_rentals.film_list
+  LIMIT 10
+)
+SELECT
+  rating,
+  COUNT(*) AS record_count
+FROM frequency_table
+GROUP BY rating
+ORDER BY record_count DESC;
 
 
 
