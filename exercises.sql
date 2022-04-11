@@ -289,6 +289,17 @@ FROM frequency_table
 GROUP BY rating
 ORDER BY record_count DESC;
 
+--Adding a Percentage Column/Calculate percentage of rating and rating frequency
+SELECT
+  rating,
+  COUNT(*) frequency_count,
+  ROUND(100 * COUNT(*)::NUMERIC / SUM(COUNT(*)) OVER (), 2) AS percentage
+FROM 
+  dvd_rentals.film_list 
+GROUP BY rating
+ORDER BY frequency_count DESC; 
+
+
 
 
 
