@@ -306,6 +306,15 @@ GROUP BY rating, category
 ORDER BY frequency_count DESC
 LIMIT 5; 
 
+--Using Positional Numbers Instead of Column Names
+SELECT
+  rating,
+  category,
+  COUNT(*) frequency_count
+FROM dvd_rentals.film_list
+GROUP BY 1,2
+ORDER BY 3 DESC
+LIMIT 5; 
 
 
 
