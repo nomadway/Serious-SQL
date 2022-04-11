@@ -231,9 +231,6 @@ GROUP BY category
 ORDER BY category;
 
 
-------------IDENTIFYING DUPLICATE RECORDS--------------------
-------------EXERCISES----------------------
-
 --How many rows are there in the film_list table?
 SELECT 
   COUNT(*) AS row_count
@@ -299,6 +296,15 @@ FROM
 GROUP BY rating
 ORDER BY frequency_count DESC; 
 
+--What are the 5 most frequent rating and category combinations in the film_list table?
+SELECT
+  rating,
+  category,
+  COUNT(*) frequency_count
+FROM dvd_rentals.film_list
+GROUP BY rating, category
+ORDER BY frequency_count DESC
+LIMIT 5; 
 
 
 
@@ -318,8 +324,8 @@ ORDER BY frequency_count DESC;
 
 
 
-
-
+------------IDENTIFYING DUPLICATE RECORDS--------------------
+------------EXERCISES----------------------
 
 --1--
 --Which id value has the most number of duplicate records in the health.user_logs table?--
